@@ -17,7 +17,15 @@ class SubjectEngine:
         self.db.commit()
         self.db.refresh(subject)
         
-        return subject
+        return {
+                "id": subject.id,
+                "name": subject.name,
+                "session_num": subject.session_num,
+                "absence_num": subject.absence_num,
+                "attendance_num": subject.attendance_num,
+                "last_attendance_date": subject.last_attendance_date,
+                "percentage": subject.percentage
+            }
 
 
 
@@ -29,10 +37,12 @@ class SubjectEngine:
         result = []
         for subject in subjects:
             result.append({
+                "id": subject.id,
                 "name": subject.name,
                 "session_num": subject.session_num,
                 "absence_num": subject.absence_num,
                 "attendance_num": subject.attendance_num,
+                "last_attendance_date": subject.last_attendance_date,
                 "percentage": subject.percentage
             })
 
@@ -93,6 +103,27 @@ class SubjectEngine:
 
         return percentage
 
+
+
+    def reset_attendance(self, subject_id):
+        subject = self.get_subject(subject_id)
+        
+        subject.session_num = 0
+        subject.attendance_num = 0
+        subject.absence_num = 0
+        subject.percentage = 0
+
+        self.db.commit()
+
+        return {
+                "id": subject.id,
+                "name": subject.name,
+                "session_num": subject.session_num,
+                "absence_num": subject.absence_num,
+                "attendance_num": subject.attendance_num,
+                "last_attendance_date": subject.last_attendance_date,
+                "percentage": subject.percentage
+            }
 
 
     def calculate_percentage(self, num, session_num):

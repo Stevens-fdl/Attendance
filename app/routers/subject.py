@@ -61,3 +61,10 @@ async def mark_full_absence(subject_id, db: db_dependency):
 async def mark_half_attendance(subject_id, db: db_dependency):
     engine = SubjectEngine(db)
     return engine.mark_half_attendance(subject_id)
+
+
+
+@router.post("/subject/{subject_id}/reset-attendance")
+async def reset_attendance(subject_id, db: db_dependency):
+    engine = SubjectEngine(db)
+    return engine.reset_attendance(subject_id)
