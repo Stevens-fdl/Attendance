@@ -39,7 +39,7 @@ class SubjectEngine:
             result.append({
                 "id": subject.id,
                 "name": subject.name,
-                "session_num": subject.session_num,
+                "session_num": subject.session_num / 2,
                 "absence_num": subject.absence_num,
                 "attendance_num": subject.attendance_num,
                 "last_attendance_date": subject.last_attendance_date,
